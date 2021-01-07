@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getAllPostSlugs, getPostData, PostSlugs } from "../../lib/posts";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Layout from "../../components/layout";
 import Date from "../../components/date";
+import Prism from "prismjs";
 
 type Params = {
   slug: string;
@@ -38,6 +39,10 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
 };
 
 const Post = ({ postData }: PostData) => {
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
+
   return (
     <Layout>
       <article>

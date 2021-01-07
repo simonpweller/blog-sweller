@@ -58,3 +58,7 @@ h1 + time {
 .post-list li {
   margin: 0 0 16px;
 }
+
+pre {
+  border-radius: 10px;
+}
