@@ -35,10 +35,10 @@ it("should create the trimmed todo, append it to the todo list, and clear the in
 ## My implementations
 
 So far, I have implemented TodoMVC in 5 different frameworks:
-- [Elm](https://github.com/simonpweller/todomvc-elm)
-- [Vue](https://github.com/simonpweller/todomvc-vue)
-- [Angular](https://github.com/simonpweller/todomvc-angular)
-- [Svelte](https://github.com/simonpweller/todomvc-svelte)
 - [React](https://github.com/simonpweller/todomvc-react)
+- [Svelte](https://github.com/simonpweller/todomvc-svelte)
+- [Angular](https://github.com/simonpweller/todomvc-angular)
+- [Vue](https://github.com/simonpweller/todomvc-vue)
+- [Elm](https://github.com/simonpweller/todomvc-elm)
 
 Time permitting, I might add write-ups here, detailing what I learned in the process. One thing I'm pretty sure about - the list will grow in time.

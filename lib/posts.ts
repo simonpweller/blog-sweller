@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import remark from "remark";
+import externalLinks from "remark-external-links";
 import matter from "gray-matter";
 import html from "remark-html";
 
@@ -54,6 +55,7 @@ export const getPostData = async (slug: string) => {
 
   const processedContent = await remark()
     .use(html)
+    .use(externalLinks)
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
 
