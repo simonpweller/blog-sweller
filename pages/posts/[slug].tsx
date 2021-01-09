@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import Layout from "../../components/layout";
 import Date from "../../components/date";
 import Prism from "prismjs";
+import Head from "next/head";
 
 type Params = {
   slug: string;
@@ -45,6 +46,10 @@ const Post = ({ postData }: PostData) => {
 
   return (
     <Layout>
+      <Head>
+        <title>{postData.title}</title>
+        <meta itemProp="description" content={postData.description} />
+      </Head>
       <article>
         <h1>{postData.title}</h1>
         <Date dateString={postData.date} />

@@ -1,6 +1,7 @@
 ---
 title: 'Using TodoMVC to learn new frontend frameworks'
 date: '2021-01-08'
+description: "Something I like to do when I'm trying to learn about a new frontend framework is to build a todo app. I like having tests for my code, but I didn't want to rewrite them for each new framework, so I created a test suite for TodoMVC."
 ---
 
 It's almost a cliché at this point, but something I like to do when I'm trying to learn about a new frontend framework is to build a todo app. There is an open source project that helps with that a lot: [TodoMVC](http://todomvc.com/).
