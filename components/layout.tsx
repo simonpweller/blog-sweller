@@ -7,6 +7,7 @@ const Layout = ({ children }: { children: any }) => {
       <Head>
         <title>Simon's blog</title>
         <link rel="icon" href="/images/favicon.ico" />
+        <meta itemProp="twitter:card" content="summary" />
       </Head>
       <main>{children}</main>
     </>
