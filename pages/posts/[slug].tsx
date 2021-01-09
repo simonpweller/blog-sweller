@@ -55,6 +55,7 @@ const Post = ({ postData }: PostData) => {
           property="og:description"
           content={postData.description}
         />
+        <meta name="twitter:description" content={postData.description} />
         <meta
           property="og:url"
           content={`https://blog.sweller.de/posts/${postData.slug}`}
