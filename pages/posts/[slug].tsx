@@ -48,10 +48,16 @@ const Post = ({ postData }: PostData) => {
     <Layout>
       <Head>
         <title>{postData.title}</title>
+        <meta property="og:title" content={postData.title} />
         <meta
           name="description"
-          itemProp="og:description"
+          itemProp="description"
+          property="og:description"
           content={postData.description}
+        />
+        <meta
+          property="og:url"
+          content={`https://blog.sweller.de/posts/${postData.slug}`}
         />
       </Head>
       <article>
