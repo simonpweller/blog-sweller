@@ -48,7 +48,11 @@ const Post = ({ postData }: PostData) => {
     <Layout>
       <Head>
         <title>{postData.title}</title>
-        <meta itemProp="description" content={postData.description} />
+        <meta
+          name="description"
+          itemProp="og:description"
+          content={postData.description}
+        />
       </Head>
       <article>
         <h1>{postData.title}</h1>
