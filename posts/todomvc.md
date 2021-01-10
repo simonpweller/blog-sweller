@@ -1,7 +1,8 @@
 ---
-title: 'Using TodoMVC to learn new frontend frameworks'
-date: '2021-01-08'
+title: "Using TodoMVC to learn new frontend frameworks"
+date: "2021-01-08"
 description: "Something I like to do when I'm trying to learn about a new frontend framework is to build a todo app. I like having tests for my code, but I didn't want to rewrite them for each new framework, so I created a test suite for TodoMVC."
+image: https://blog.sweller.de/images/headshot.png
 ---
 
 It's almost a cliché at this point, but something I like to do when I'm trying to learn about a new frontend framework is to build a todo app. There is an open source project that helps with that a lot: [TodoMVC](http://todomvc.com/).
@@ -15,27 +16,29 @@ There is some css and html to get you started, so you don't need to worry about 
 I like having tests for my code, but I didn't want to rewrite them for each new framework, so I created a [Cypress](https://www.cypress.io/) test suite for TodoMVC. Cypress tests interact directly with the app in the browser, so they work regardless of the underlying technology. You can check out the full test suite (and use it yourself) on [github](https://github.com/simonpweller/todomvc-tests).
 
 To give you a taste for what these tests look like, here's an example:
+
 ```javascript
 it("should create the trimmed todo, append it to the todo list, and clear the input when Enter is pressed", () => {
-    cy.get(".new-todo").type("Learn JavaScript ").type("{enter}");
-    
-    cy.get(".todo-list").find("li").should("have.length", 1);
-    cy.get(".todo-list")
-        .find("label")
-        .first()
-        .should("have.text", "Learn JavaScript");
-    cy.get(".new-todo").should("have.value", "");
-    cy.get(".toggle").should("not.be.checked");
-    cy.get("li").first().should("not.have.class", "completed");
-    
-    cy.get(".main").should("be.visible");
-    cy.get(".footer").should("be.visible");
+  cy.get(".new-todo").type("Learn JavaScript ").type("{enter}");
+
+  cy.get(".todo-list").find("li").should("have.length", 1);
+  cy.get(".todo-list")
+    .find("label")
+    .first()
+    .should("have.text", "Learn JavaScript");
+  cy.get(".new-todo").should("have.value", "");
+  cy.get(".toggle").should("not.be.checked");
+  cy.get("li").first().should("not.have.class", "completed");
+
+  cy.get(".main").should("be.visible");
+  cy.get(".footer").should("be.visible");
 });
 ```
 
 ## My implementations
 
 So far, I have implemented TodoMVC in 5 different frameworks:
+
 - [React](https://github.com/simonpweller/todomvc-react)
 - [Svelte](https://github.com/simonpweller/todomvc-svelte)
 - [Angular](https://github.com/simonpweller/todomvc-angular)

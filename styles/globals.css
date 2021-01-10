@@ -62,3 +62,7 @@ h1 + time {
 pre {
   border-radius: 10px;
 }
+
+article img {
+  width: 100%;
+}

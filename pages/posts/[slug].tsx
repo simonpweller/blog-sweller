@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import Layout from "../../components/layout";
 import Date from "../../components/date";
 import Prism from "prismjs";
+import "prismjs/components/prism-typescript";
 import Head from "next/head";
 
 type Params = {
@@ -55,6 +56,9 @@ const Post = ({ postData }: PostData) => {
           property="og:description"
           content={postData.description}
         />
+        {postData.image ? (
+          <meta property="og:image" content={postData.image} />
+        ) : null}
         <meta name="twitter:description" content={postData.description} />
         <meta
           property="og:url"
