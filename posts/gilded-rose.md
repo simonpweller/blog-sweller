@@ -11,7 +11,7 @@ The [original kata](https://github.com/NotMyself/GildedRose) was written in C#, 
 
 ## Gilded Rose Requirements Specification
 
-The piece of software you are asked to refactor in the Gilded Rose kata is an inventory system for a fictional shop. There is some [existing code](https://github.com/emilybache/GildedRose-Refactoring-Kata/blob/master/js-jest/src/gilded_rose.js) that meets all the [requirements](https://github.com/NotMyself/GildedRose#gilded-rose-refactoring-kata), but it's not very readable (that's a bit of an understatement as you'll come to see).
+The piece of software you are asked to refactor in the Gilded Rose kata is an inventory system for a fictional shop. There is some [existing code](https://github.com/emilybache/GildedRose-Refactoring-Kata/blob/master/js-jest/src/gilded_rose.js) that meets all the [requirements](https://github.com/NotMyself/GildedRose#gilded-rose-refactoring-kata), but it's not very readable (that's a bit of an understatement as you'll come to see). Your task is to add a new feature ("Conjured" items degrade in Quality twice as fast as normal items), but first the code needs to be refactored.
 
 ## Writing a test suite
 
@@ -21,7 +21,7 @@ There are some text-based tests you can use to make sure you don't break the cod
 2. Refactor the code, i.e. make it more readable / performant without changing the external behaviour
 3. Make sure the tests still pass, so you _know_ you haven't changed the external behaviour
 
-So with that goal in mind, here are the tests, I've written. They are somewhat repetitive, but I've extracted a function to handle most of the boilerplate.
+So with that goal in mind, here are the tests, I've written. They are somewhat repetitive, but I've extracted a function to handle most of the boilerplate. The last set of tests is skipped for now, since the existing code does not implement the new feature.
 
 ```javascript
 const { Shop, Item } = require("../src/gilded_rose");
@@ -137,6 +137,29 @@ describe(`Gilded Rose`, () => {
         verifyItemAfterUpdate(
           new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
           new Item("Backstage passes to a TAFKAL80ETC concert", 4, 50)
+        );
+      });
+    });
+
+    describe.skip(`Conjured items`, () => {
+      it(`should degrade by 1 in sellIn and 2 in quality`, () => {
+        verifyItemAfterUpdate(
+          new Item("Conjured Mana Cake", 10, 5),
+          new Item("Conjured Mana Cake", 9, 3)
+        );
+      });
+
+      it(`should degrade in quality twice as fast once the sellBy has passed`, () => {
+        verifyItemAfterUpdate(
+          new Item("Conjured Mana Cake", 0, 5),
+          new Item("Conjured Mana Cake", -1, 1)
+        );
+      });
+
+      it(`should never degrade below quality 0`, () => {
+        verifyItemAfterUpdate(
+          new Item("Conjured Mana Cake", 5, 0),
+          new Item("Conjured Mana Cake", 4, 0)
         );
       });
     });
@@ -599,18 +622,18 @@ class Shop {
       if (item.name === "Sulfuras, Hand of Ragnaros") return;
 
       if (item.name === "Aged Brie") {
-        item.quality = this.getQualityIncreasedUpTo50(
+        item.quality = this.qualityIncreasedUpTo50(
           item,
           this.isExpired(item) ? 2 : 1
         );
       } else if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
-        item.quality = this.getQualityIncreasedUpTo50(
+        item.quality = this.qualityIncreasedUpTo50(
           item,
           this.getBackstagePassesQualityIncrease(item.sellIn)
         );
         if (item.sellIn === 0) item.quality = 0;
       } else {
-        item.quality = this.getQualityDecreasedDownTo0(
+        item.quality = this.qualityDecreasedDownTo0(
           item,
           this.isExpired(item) ? 2 : 1
         );
@@ -633,11 +656,11 @@ class Shop {
     return qualityIncrease;
   }
 
-  getQualityDecreasedDownTo0(item, amount = 1) {
+  qualityDecreasedDownTo0(item, amount = 1) {
     return Math.max(item.quality - amount, 0);
   }
 
-  getQualityIncreasedUpTo50(item, amount = 1) {
+  qualityIncreasedUpTo50(item, amount = 1) {
     return Math.min(item.quality + amount, 50);
   }
 }
@@ -661,18 +684,15 @@ function getNextQuality(item) {
     case "Sulfuras, Hand of Ragnaros":
       return item.quality;
     case "Aged Brie":
-      return this.getQualityIncreasedUpTo50(item, this.isExpired(item) ? 2 : 1);
+      return this.qualityIncreasedUpTo50(item, this.isExpired(item) ? 2 : 1);
     case "Backstage passes to a TAFKAL80ETC concert":
       if (item.sellIn === 0) return 0;
-      return this.getQualityIncreasedUpTo50(
+      return this.qualityIncreasedUpTo50(
         item,
         this.getBackstagePassesQualityIncrease(item.sellIn)
       );
     default:
-      return this.getQualityDecreasedDownTo0(
-        item,
-        this.isExpired(item) ? 2 : 1
-      );
+      return this.qualityDecreasedDownTo0(item, this.isExpired(item) ? 2 : 1);
   }
 }
 ```
@@ -713,25 +733,19 @@ class Shop {
       case "Sulfuras, Hand of Ragnaros":
         return item.quality;
       case "Aged Brie":
-        return this.getQualityIncreasedUpTo50(
-          item,
-          this.isExpired(item) ? 2 : 1
-        );
+        return this.qualityIncreasedUpTo50(item, this.isExpired(item) ? 2 : 1);
       case "Backstage passes to a TAFKAL80ETC concert":
         if (this.isExpired(item)) {
           return 0;
         } else if (item.sellIn > 10) {
-          return this.getQualityIncreasedUpTo50(item, 1);
+          return this.qualityIncreasedUpTo50(item, 1);
         } else if (item.sellIn > 5) {
-          return this.getQualityIncreasedUpTo50(item, 2);
+          return this.qualityIncreasedUpTo50(item, 2);
         } else {
-          return this.getQualityIncreasedUpTo50(item, 3);
+          return this.qualityIncreasedUpTo50(item, 3);
         }
       default:
-        return this.getQualityDecreasedDownTo0(
-          item,
-          this.isExpired(item) ? 2 : 1
-        );
+        return this.qualityDecreasedDownTo0(item, this.isExpired(item) ? 2 : 1);
     }
   }
 
@@ -739,16 +753,43 @@ class Shop {
     return item.sellIn <= 0;
   }
 
-  getQualityDecreasedDownTo0(item, amount = 1) {
+  qualityDecreasedDownTo0(item, amount = 1) {
     return Math.max(item.quality - amount, 0);
   }
 
-  getQualityIncreasedUpTo50(item, amount = 1) {
+  qualityIncreasedUpTo50(item, amount = 1) {
     return Math.min(item.quality + amount, 50);
   }
 }
 ```
 
-I'm reasonably happy with that. You can easily read it top to bottom, and the business logic is largely captured in a single switch statement. If you wanted to add logic for a new item, it's as simple as adding another case there.
+I'm reasonably happy with that. You can easily read it top to bottom, and the business logic is largely captured in a single switch statement. If you're interested in another perspective, I recommend you watch this excellent [video](https://www.youtube.com/watch?v=8bZh5LMaSmE) by Sandy Metz. I have chosen a slightly different approach, because I think co-locating the switch with the quality update logic makes it easier to quickly understand how the system behaves without having to jump between classes.
+
+Before we go, we need to implement the new feature - Conjured items. Fortunately, that's easy now. We just add another case. Nice!
+
+```javascript
+function getNextQuality(item) {
+  switch (item.name) {
+    case "Sulfuras, Hand of Ragnaros":
+      return item.quality;
+    case "Aged Brie":
+      return this.qualityIncreasedUpTo50(item, this.isExpired(item) ? 2 : 1);
+    case "Backstage passes to a TAFKAL80ETC concert":
+      if (this.isExpired(item)) {
+        return 0;
+      } else if (item.sellIn > 10) {
+        return this.qualityIncreasedUpTo50(item, 1);
+      } else if (item.sellIn > 5) {
+        return this.qualityIncreasedUpTo50(item, 2);
+      } else {
+        return this.qualityIncreasedUpTo50(item, 3);
+      }
+    case "Conjured Mana Cake":
+      return this.qualityDecreasedDownTo0(item, this.isExpired(item) ? 4 : 2);
+    default:
+      return this.qualityDecreasedDownTo0(item, this.isExpired(item) ? 2 : 1);
+  }
+}
+```
 
 What do you think? Would you do something differently? Did you learn something?
