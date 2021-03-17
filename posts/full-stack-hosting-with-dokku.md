@@ -82,7 +82,7 @@ Push the app to the server with `git push dokku master`. Dokku should recognize 
 
 # Was that really worth the trouble?
 
-Wow, that was a lot of work. What do we get for our troubles? We now have a functioning app with a database and https support on [https://locallibrary.apps.sweller.de/](https://locallibrary.apps.sweller.de/). We can re-deploy it after making changes by running a single command (`git push dokku master`). If you want to deploy another app, you only need to go through steps 5-6 again, so that's when you start really reaping the rewards. You can easily host multiple apps on a single Digital Ocean droplet.
+Wow, that was a lot of work. What do we get for our troubles? We now have a functioning app with a database and https support on `https://locallibrary.apps.sweller.de/` (I've taken the droplet down though, so the link is dead). We can re-deploy it after making changes by running a single command (`git push dokku master`). If you want to deploy another app, you only need to go through steps 5-6 again, so that's when you start really reaping the rewards. You can easily host multiple apps on a single Digital Ocean droplet.
 
 What do you think? Will you try this for your next project?
 
