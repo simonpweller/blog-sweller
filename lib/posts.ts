@@ -14,28 +14,7 @@ export type PostData = {
   title: string;
 };
 
-export const getSortedPostsData: () => PostData[] = () => {
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData: PostData[] = fileNames.map((fileName) => {
-    const slug = fileName.replace(".md", "");
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const matterResult = matter(fileContents);
-
-    return {
-      slug,
-      ...matterResult.data,
-    } as PostData;
-  });
-
-  return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
-};
+export const sortedPostData: PostData[] = getSortedPostData();
 
 export const getAllPostSlugs = (): PostSlugs => {
   const fileNames = fs.readdirSync(postsDirectory);
@@ -65,3 +44,29 @@ export const getPostData = async (slug: string) => {
     ...matterResult.data,
   };
 };
+
+function getSortedPostData(): PostData[] {
+  const fileNames = fs.readdirSync(postsDirectory);
+  const allPostsData: PostData[] = fileNames.map(readPostData);
+  return allPostsData.sort(dateSort);
+}
+
+function readPostData(fileName: string): PostData {
+  const slug = fileName.replace(".md", "");
+  const fullPath = path.join(postsDirectory, fileName);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const matterResult = matter(fileContents);
+
+  return {
+    slug,
+    ...matterResult.data,
+  } as PostData;
+}
+
+function dateSort(a: PostData, b: PostData): 1 | -1 {
+  if (a.date < b.date) {
+    return 1;
+  } else {
+    return -1;
+  }
+}
