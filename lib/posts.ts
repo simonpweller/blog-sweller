@@ -13,8 +13,10 @@ export type PostData = {
   date: string;
   title: string;
 };
+type PostIndices = { [slug: string]: number };
 
 export const sortedPostData: PostData[] = getSortedPostData();
+const postIndices: PostIndices = getPostIndices();
 
 export const getAllPostSlugs = (): PostSlugs => {
   const fileNames = fs.readdirSync(postsDirectory);
@@ -26,7 +28,7 @@ export const getAllPostSlugs = (): PostSlugs => {
   }));
 };
 
-export const getPostData = async (slug: string) => {
+export const getPostDetails = async (slug: string) => {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -38,9 +40,15 @@ export const getPostData = async (slug: string) => {
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
 
+  const postIndex = postIndices[slug];
+  const prev = sortedPostData[postIndex - 1] ?? null;
+  const next = sortedPostData[postIndex + 1] ?? null;
+
   return {
     slug,
     contentHtml,
+    prev,
+    next,
     ...matterResult.data,
   };
 };
@@ -49,6 +57,16 @@ function getSortedPostData(): PostData[] {
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData: PostData[] = fileNames.map(readPostData);
   return allPostsData.sort(dateSort);
+}
+
+function getPostIndices() {
+  return sortedPostData.reduce(
+    (acc: PostIndices, curr: PostData, index: number) => {
+      acc[curr.slug] = index;
+      return acc;
+    },
+    {}
+  );
 }
 
 function readPostData(fileName: string): PostData {

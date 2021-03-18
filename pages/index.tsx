@@ -1,8 +1,8 @@
 import React from "react";
-import Link from "next/link";
 import Date from "../components/date";
 import Layout from "../components/layout";
 import { PostData, sortedPostData } from "../lib/posts";
+import PostLink from "../components/post-link";
 
 export async function getStaticProps() {
   return {
@@ -24,14 +24,12 @@ const Index = ({ sortedPostData }: { sortedPostData: PostData[] }) => {
 
       <section>
         <ul className="post-list">
-          {sortedPostData.map(({ slug, title, date }: PostData) => (
-            <li key={slug}>
-              <Link href={`/posts/${slug}`}>
-                <a>{title}</a>
-              </Link>
+          {sortedPostData.map((postData: PostData) => (
+            <li key={postData.slug}>
+              <PostLink {...postData} />
               <br />
               <small>
-                <Date dateString={date} />
+                <Date dateString={postData.date} />
               </small>
             </li>
           ))}
