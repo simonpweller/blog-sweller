@@ -44,10 +44,9 @@ main {
 }
 
 h1 + time {
-  margin-top: -30px;
+  margin-top: -25px;
   display: block;
   color: #9b9b9b;
-  margin-bottom: 30px;
 }
 
 .post-list {
@@ -59,12 +58,29 @@ h1 + time {
   margin: 0 0 16px;
 }
 
+.tags {
+  margin-top: 10px;
+}
+
+.tag {
+  background-color: #0d3869;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
 pre {
   border-radius: 10px;
 }
 
 article img {
   width: 100%;
+}
+
+article header {
+  margin-bottom: 30px;
 }
 
 footer {

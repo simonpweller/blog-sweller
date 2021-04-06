@@ -3,6 +3,7 @@ title: "The Gilded Rose Kata - an Exercise in Refactoring"
 date: "2021-01-16"
 description: "The Gilded Rose is a unique code kata all about refactoring existing code. I break down my approach to solving it in JavaScript"
 image: https://blog.sweller.de/images/headshot.png
+tags: refactoring,testing
 ---
 
 A while ago, I heard about the Gilded Rose kata on a podcast and decided to check it out. If you're not familiar with the general concept, a code kata is a small exercise designed to practice a particular skill. Many code kata are about designing algorithms, using datastructures that are well suited to a problem, practicing certain language features and so on. The Gilded Rose is quite different as it is all about refactoring existing code.

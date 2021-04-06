@@ -3,6 +3,7 @@ title: "Hosting your full stack apps for 5$ a month with Digital Ocean and Dokku
 date: "2021-02-23"
 description: "Services like Netlify and GitHub Pages have made hosting static sites trivial - learn how to easily host full stack apps with Dokku"
 image: https://blog.sweller.de/images/dokku-logo.png
+tags: deployment
 ---
 
 Services like Netlify and GitHub Pages have made hosting static sites trivial - make an account, link up your github account, select a repository, click deploy. That's it. That's all there's to it. This has made it much easier for beginners to get their sites online, and I love it.

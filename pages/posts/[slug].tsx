@@ -12,6 +12,7 @@ import Prism from "prismjs";
 import "prismjs/components/prism-typescript";
 import Head from "next/head";
 import PostFooter from "./post-footer";
+import Tag from "../../components/tag";
 
 type Params = {
   slug: string;
@@ -21,7 +22,7 @@ type Props = {
   postDetails: PostDetails;
 };
 
-type PostDetails = {
+export type PostDetails = {
   [p: string]: any;
   prev: PostData | null;
   next: PostData | null;
@@ -74,8 +75,15 @@ const Post = ({ postDetails }: PostDetails) => {
         />
       </Head>
       <article>
-        <h1>{postDetails.title}</h1>
-        <Date dateString={postDetails.date} />
+        <header>
+          <h1>{postDetails.title}</h1>
+          <Date dateString={postDetails.date} />
+          <div className="tags">
+            {postDetails.tags.map((tag: string) => (
+              <Tag key={tag} text={tag} />
+            ))}
+          </div>
+        </header>
         <div dangerouslySetInnerHTML={{ __html: postDetails.contentHtml }} />
       </article>
 

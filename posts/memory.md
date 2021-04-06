@@ -3,6 +3,7 @@ title: "Building a memory game with React and TypeScript"
 date: "2021-01-10"
 description: "On weekend mornings, I sometimes build little JavaScript games with my son. In this post, I break down how to build a simple memory game with React."
 image: https://blog.sweller.de/images/fox-memory.jpg
+tags: games,react
 ---
 
 On the weekend, I sometimes build little JavaScript games with my son. He's 5, so I write the code while he pitches in ideas, makes decisions about the design and play-tests the game. It can be a bit stressful, but it really helps with analysis-paralysis!

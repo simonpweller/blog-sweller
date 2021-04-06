@@ -4,19 +4,38 @@ import remark from "remark";
 import externalLinks from "remark-external-links";
 import matter from "gray-matter";
 import html from "remark-html";
+import { PostDetails } from "../pages/posts/[slug]";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
 export type PostSlugs = { params: { slug: string } }[];
+export type TagSlugs = { params: { tag: string } }[];
 export type PostData = {
   slug: string;
   date: string;
   title: string;
+  tags: string[];
 };
 type PostIndices = { [slug: string]: number };
 
 export const sortedPostData: PostData[] = getSortedPostData();
+export const tags: string[] = Array.from(
+  sortedPostData.reduce<Set<string>>((acc, curr) => {
+    curr.tags.forEach((tag) => acc.add(tag));
+    return acc;
+  }, new Set())
+);
 const postIndices: PostIndices = getPostIndices();
+
+export const getPostsByTag: (tag: string) => PostData[] = (tag) => {
+  return sortedPostData.filter((post) => post.tags.includes(tag));
+};
+export const getAllTagsSlugs = (): TagSlugs =>
+  tags.map((tag) => ({
+    params: {
+      tag,
+    },
+  }));
 
 export const getAllPostSlugs = (): PostSlugs => {
   const fileNames = fs.readdirSync(postsDirectory);
@@ -28,7 +47,9 @@ export const getAllPostSlugs = (): PostSlugs => {
   }));
 };
 
-export const getPostDetails = async (slug: string) => {
+export const getPostDetails: (slug: string) => Promise<PostDetails> = async (
+  slug: string
+) => {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -50,6 +71,7 @@ export const getPostDetails = async (slug: string) => {
     prev,
     next,
     ...matterResult.data,
+    tags: matterResult.data.tags?.split(",") ?? [],
   };
 };
 
@@ -78,6 +100,7 @@ function readPostData(fileName: string): PostData {
   return {
     slug,
     ...matterResult.data,
+    tags: matterResult.data.tags?.split(",") ?? [],
   } as PostData;
 }
 
