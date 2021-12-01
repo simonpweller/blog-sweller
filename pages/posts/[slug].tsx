@@ -10,6 +10,7 @@ import Layout from "../../components/layout";
 import Date from "../../components/date";
 import Prism from "prismjs";
 import "prismjs/components/prism-typescript";
+import "prismjs/components/prism-kotlin";
 import Head from "next/head";
 import PostFooter from "./post-footer";
 import Tag from "../../components/tag";
