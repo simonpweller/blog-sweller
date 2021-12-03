@@ -49,7 +49,7 @@ fun findRating(binaries: List<String>, getRequiredBitAt: (binaries: List<String>
 
 We can then re-use the functions from part 1 by passing them in.
 
-```
+```kotlin
 fun part2(binaries: List<String>): Int {
     val oxygenGeneratorRating = findRating(binaries, ::mostCommonBitAt).toInt(2)
     val co2ScrubberRating = findRating(binaries, ::leastCommonBitAt).toInt(2)
