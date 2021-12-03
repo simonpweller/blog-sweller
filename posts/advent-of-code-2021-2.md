@@ -8,7 +8,7 @@ tags: adventOfCode kotlin
 
 This is part 2 of a series, so if you haven't read part 1, you can find it [here](https://blog.sweller.de/posts/advent-of-code-2021-1).
 
-Today's puzzle is another Advent of Code classic: parsing instructions and simulating what happens when you carry them out. In this case the instructions are for moving a submarine, either up, down or forward.
+Today's [puzzle](https://adventofcode.com/2021/day/2) is another Advent of Code classic: parsing instructions and simulating what happens when you carry them out. In this case the instructions are for moving a submarine, either up, down or forward.
 
 For these puzzles, I usually make a simple data class and parse the instruction strings into a list of instances of that class. This is totally optional and should probably be skipped if you're aiming for the leaderboard. I like to take the time and include this step though.
 
