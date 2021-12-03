@@ -45,9 +45,11 @@ const Index = ({ sortedPostData, tags }: IndexProps) => {
 
       <section>
         <h2>Tags</h2>
-        {tags.map((tag: string) => (
-          <Tag key={tag} text={tag} />
-        ))}
+        <div className="tags">
+          {tags.map((tag: string) => (
+            <Tag key={tag} text={tag} />
+          ))}
+        </div>
       </section>
     </Layout>
   );
