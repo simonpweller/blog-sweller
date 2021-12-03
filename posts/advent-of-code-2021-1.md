@@ -3,7 +3,7 @@ title: "Advent of Code in Kotlin 2021 - Day 1"
 date: "2021-12-01"
 description: "My solutions to Advent of Code in Kotlin - Day 1 of 2021"
 image: https://blog.sweller.de/images/advent-of-code.png
-tags: adventOfCode kotlin
+tags: adventOfCode,kotlin
 ---
 
 I look forward to Advent of Code every year. It's a series of fun, increasingly challenging puzzles for each day of December (until Christmas) that can be solved in any programming language.

@@ -3,7 +3,7 @@ title: "Advent of Code in Kotlin 2021 - Day 3"
 date: "2021-12-03"
 description: "My solutions to Advent of Code in Kotlin - Day 3 of 2021"
 image: https://blog.sweller.de/images/advent-of-code.png
-tags: adventOfCode kotlin
+tags: adventOfCode,kotlin
 ---
 
 This is part 3 of a series, so if you haven't read the previous parts, start [here](https://blog.sweller.de/posts/advent-of-code-2021-1).
