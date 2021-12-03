@@ -61,9 +61,11 @@ const TagPage = ({ sortedPostData, tag, tags }: Props) => {
 
       <section>
         <h2>All tags</h2>
-        {tags.map((tag: string) => (
-          <Tag key={tag} text={tag} />
-        ))}
+        <div className="tags">
+          {tags.map((tag: string) => (
+            <Tag key={tag} text={tag} />
+          ))}
+        </div>
       </section>
     </Layout>
   );
