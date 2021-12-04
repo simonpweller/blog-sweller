@@ -32,7 +32,7 @@ In the BingoBoard class, I store the count of marked numbers in each row / colum
 
 This allows the markNumber function to know which counts to update without having to iterate over the board. Once one of the counts reaches 5 (the size of the board), it will be marked as complete.
 
-```
+```kotlin
 private class BingoBoard(private val rows: List<List<Int>>) {
     var isComplete: Boolean = false
     val numRows = rows.size
