@@ -118,7 +118,7 @@ private val Bracket.closingCharacterScores: Int
 
 Finally, we can calculate the scores for both parts and solve the puzzle.
 
-```
+```kotlin
 fun main() {
     val lines = inputLines(2021, 10).map(::ProgramLine)
     println(part1(lines))
