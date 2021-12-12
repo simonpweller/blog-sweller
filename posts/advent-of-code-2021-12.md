@@ -85,4 +85,4 @@ fun main() {
 }
 ```
 
-I got done with today's puzzle surprisingly quickly. Mercifully, the adjusted difficulty curve we saw in 2021 seems to be here to stay (knock on wood). Two more stars in the bag.
+I got done with today's puzzle surprisingly quickly. Mercifully, the adjusted difficulty curve we saw in 2020 seems to be here to stay (knock on wood). Two more stars in the bag.
