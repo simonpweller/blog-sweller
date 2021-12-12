@@ -31,7 +31,7 @@ const Index = ({ sortedPostData, tags }: IndexProps) => {
       <section>
         <h2>Latest posts</h2>
         <ul className="post-list">
-          {sortedPostData.map((postData: PostData) => (
+          {sortedPostData.slice(0, 5).map((postData: PostData) => (
             <li key={postData.slug}>
               <PostLink {...postData} />
               <br />
