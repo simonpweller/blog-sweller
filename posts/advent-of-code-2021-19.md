@@ -13,13 +13,6 @@ For today's [puzzle](https://adventofcode.com/2021/day/19) we are given a list o
 This was another day that I'm not particularly happy with my solution. It's slow and convoluted, but this was a pretty tough task, and I didn't have much free time today. I'll take just hanging on to the streak for now.
 
 ```kotlin
-package y2021
-
-import combinations
-import inputChunks
-import subListsOfSize
-import kotlin.math.abs
-
 fun main() {
     val scanners = inputChunks(2021, 19).map(Scanner.Companion::of)
     var remainingScanners = scanners.drop(1)
